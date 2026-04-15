@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Blue Co-Pilot</title>
+    <!-- Use Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="top-bar">
+            <div class="logo">
+                <span class="pulse-dot"></span>
+                <h1>Code Blue Co-Pilot</h1>
+            </div>
+            <div class="status-indicator">
+                <span id="connection-status" class="status offline">Connecting...</span>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Grid -->
+        <main class="dashboard-grid">
+            
+            <!-- Left Column: Vitals & Input -->
+            <div class="left-panel">
+                <!-- Vitals Entry -->
+                <section class="card vitals-section">
+                    <h2>Patient Vitals</h2>
+                    <form id="vitals-form">
+                        <div class="input-group">
+                            <label>HR (bpm)</label>
+                            <input type="number" id="input-hr" placeholder="e.g., 0" required>
+                        </div>
+                        <div class="input-group">
+                            <label>SpO2 (%)</label>
+                            <input type="number" id="input-spo2" placeholder="e.g., 85" max="100">
+                        </div>
+                        <div class="input-group">
+                            <label>SBP (mmHg)</label>
+                            <input type="number" id="input-sbp" placeholder="e.g., 70">
+                        </div>
+                        <button type="submit" class="btn primary">Assess Risk</button>
+                    </form>
+                    <div id="risk-display" class="risk-meter hidden">
+                        <h3>Predicted Cardiac Arrest Risk:</h3>
+                        <div class="risk-score" id="risk-score-value">--</div>
+                    </div>
+                </section>
+
+                <!-- Event Input -->
+                <section class="card Event-input-section">
+                    <h2>Record Clinical Event</h2>
+                    <p class="subtitle">Type clinical events (NLP parsing will structure it)</p>
+                    <div class="input-area">
+                        <input type="text" id="clinical-input" placeholder="e.g., 'Epinephrine 1mg administered'">
+                        <button id="btn-submit-event" class="btn action">Log</button>
+                    </div>
+                </section>
+                
+                <!-- Action Controls -->
+                <section class="card control-section">
+                    <button id="btn-start-code" class="btn critical">START CODE BLUE</button>
+                    <div class="input-area" style="margin-top: 1rem;">
+                        <button id="btn-generate-report" class="btn secondary hidden">Generate Final Report</button>
+                        <button id="btn-reset-session" class="btn secondary hidden" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); color: var(--accent-red);">Reset Session</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Timeline & Alerts -->
+            <div class="right-panel">
+                <!-- Live Alerts Overhead -->
+                <section class="card alerts-section">
+                    <h2>Current Directives (ACLS)</h2>
+                    <div id="active-directive" class="directive-box">
+                        <span class="directive-text">Awaiting initiating event...</span>
+                    </div>
+                    
+                    <div class="timers-container">
+                        <div class="timer-box cpr-timer" id="timer-cpr">
+                            <span class="timer-label">CPR Cycle</span>
+                            <span class="timer-value">00:00</span>
+                        </div>
+                        <div class="timer-box epi-timer" id="timer-epi">
+                            <span class="timer-label">Next Epinephrine</span>
+                            <span class="timer-value">00:00</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Event Log -->
+                <section class="card log-section">
+                    <h2>Event Timeline</h2>
+                    <ul id="event-timeline" class="timeline-list">
+                        <!-- Events will populate here -->
+                    </ul>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Socket.IO library from CDN -->
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/socket.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
