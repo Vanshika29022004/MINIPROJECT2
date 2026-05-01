@@ -81,15 +81,37 @@
                         <span class="directive-text">Awaiting initiating event...</span>
                     </div>
                     
+                    <!-- New Interactive Timer System -->
                     <div class="timers-container">
-                        <div class="timer-box cpr-timer" id="timer-cpr">
-                            <span class="timer-label">CPR Cycle</span>
+                        <div class="timer-box total-timer" id="timer-total">
+                            <span class="timer-label">Total Code Time</span>
                             <span class="timer-value">00:00</span>
                         </div>
-                        <div class="timer-box epi-timer" id="timer-epi">
-                            <span class="timer-label">Next Epinephrine</span>
+                        <div class="timer-box cycle-timer" id="timer-cycle">
+                            <span class="timer-label">Current Step</span>
                             <span class="timer-value">00:00</span>
                         </div>
+                    </div>
+                    
+                    <!-- Step Progress -->
+                    <div class="step-progress-container">
+                        <div class="step-header">
+                            <span class="current-step-name">--</span>
+                            <span class="time-remaining">00:00</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="step-progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step Indicators -->
+                    <div class="step-indicator">
+                        <div class="step-item" data-step="0">CPR</div>
+                        <div class="step-item" data-step="1">Rhythm</div>
+                        <div class="step-item" data-step="2">CPR</div>
+                        <div class="step-item" data-step="3">Pulse</div>
+                        <div class="step-item" data-step="4">CPR</div>
+                        <div class="step-item" data-step="5">Meds</div>
                     </div>
                 </section>
 

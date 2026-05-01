@@ -126,10 +126,15 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Clear Timers and Directives
             document.querySelector('.directive-text').textContent = "Awaiting initiating event...";
-            document.querySelector('#timer-cpr .timer-value').textContent = "00:00";
-            document.querySelector('#timer-epi .timer-value').textContent = "00:00";
-            document.querySelector('#timer-cpr .timer-value').style.color = "var(--text-primary)";
-            document.querySelector('#timer-epi .timer-value').style.color = "var(--accent-yellow)";
+            document.querySelector('#timer-total .timer-value').textContent = "00:00";
+            document.querySelector('#timer-cycle .timer-value').textContent = "00:00";
+            document.querySelector('.current-step-name').textContent = "--";
+            document.querySelector('.time-remaining').textContent = "00:00";
+            document.querySelector('.step-progress-fill').style.width = "0%";
+            
+            // Reset step indicators
+            const stepItems = document.querySelectorAll('.step-item');
+            stepItems.forEach(item => item.classList.remove('active'));
             
             // Re-hide action buttons
             document.getElementById('btn-generate-report').classList.add('hidden');

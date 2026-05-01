@@ -302,6 +302,34 @@ input::placeholder { color: rgba(148, 163, 184, 0.5); }
 .cpr-timer::before { background: var(--accent-blue); box-shadow: 0 0 10px var(--accent-blue); }
 .epi-timer::before { background: var(--accent-yellow); box-shadow: 0 0 10px var(--accent-yellow); }
 
+/* New Interactive Timer System */
+.timers-container {
+    display: flex;
+    gap: 1.25rem;
+}
+.timer-box {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.25rem;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.timer-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--border-color);
+}
+
+.total-timer::before { background: var(--accent-red); box-shadow: 0 0 10px var(--accent-red); }
+.cycle-timer::before { background: var(--accent-blue); box-shadow: 0 0 10px var(--accent-blue); }
+
 .timer-label { 
     display: block; 
     font-size: 0.8rem; 
@@ -318,8 +346,98 @@ input::placeholder { color: rgba(148, 163, 184, 0.5); }
     letter-spacing: 2px;
     text-shadow: 0 0 15px rgba(255,255,255,0.1);
 }
-.cpr-timer .timer-value { color: var(--text-primary); }
-.epi-timer .timer-value { color: var(--accent-yellow); }
+.total-timer .timer-value { color: var(--accent-red); }
+.cycle-timer .timer-value { color: var(--accent-blue); }
+
+/* Step Progress */
+.step-progress-container {
+    margin-top: 1.25rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.current-step-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.time-remaining {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-yellow);
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.step-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+    border-radius: 4px;
+    transition: width 1s linear;
+    box-shadow: 0 0 10px var(--accent-blue-glow);
+}
+
+/* Step Indicator */
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.step-item {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.step-item.active {
+    background: var(--accent-blue);
+    color: white;
+    box-shadow: 0 0 10px var(--accent-blue-glow);
+}
+
+.step-item[data-step="0"],
+.step-item[data-step="2"],
+.step-item[data-step="4"] {
+    border-left: 2px solid var(--accent-red);
+}
+
+.step-item[data-step="1"],
+.step-item[data-step="3"] {
+    border-left: 2px solid var(--accent-yellow);
+}
+
+.step-item[data-step="5"] {
+    border-left: 2px solid var(--accent-green);
+}
 
 /* Timeline Log */
 .log-section { 
